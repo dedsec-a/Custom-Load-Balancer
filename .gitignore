@@ -1,0 +1,9 @@
+node_modules/
+dist/
+bin/
+*.exe
+*.exe~
+.env
+*.pem
+lb.tgz
+lbimages.tar.gz

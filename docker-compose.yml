@@ -1,0 +1,120 @@
+# docker compose up -d --build
+#
+# Internet -> caddy (80/443, HTTPS) -> lb -> b1, b2, b3
+# Only caddy publishes ports. lb and the backends are reachable only on the
+# private Compose network, so the backends' /admin routes are never public.
+
+# Fixed project name: images are always loadbalancer-lb, loadbalancer-b1, ...
+# whatever the folder is called (the deploy workflow relies on it).
+name: loadbalancer
+
+x-app: &app
+  # Every service builds the same Dockerfile. The layer cache makes that one
+  # real build; separate tags avoid a race on a shared image name.
+  build: .
+  restart: unless-stopped
+  init: true
+
+x-backend: &backend
+  <<: *app
+  mem_limit: 96m
+  healthcheck:
+    test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/health"]
+    interval: 10s
+    timeout: 3s
+    retries: 3
+
+services:
+  b1:
+    <<: *backend
+    command: ["backend", "--port", "3000", "--name", "b1", "--cores", "2", "--db-pool", "5"]
+  b2:
+    <<: *backend
+    command: ["backend", "--port", "3000", "--name", "b2", "--cores", "2", "--db-pool", "5"]
+  b3:
+    <<: *backend
+    command: ["backend", "--port", "3000", "--name", "b3", "--cores", "2", "--db-pool", "5"]
+
+  lb:
+    <<: *app
+    command:
+      - lb
+      - --port=8080
+      - --admin-port=8081
+      - --backends=b1=http://b1:3000,b2=http://b2:3000,b3=http://b3:3000
+      - --ui-dir=/app/ui
+      - --cors-origin=
+      - --demo
+      - --max-users=${MAX_USERS:-300}
+      - --trust-xff
+      - --public-rate=${PUBLIC_RATE:-50}
+      - --results-dir=/data/experiments
+      - --max-experiment=${MAX_EXPERIMENT:-30m}
+    environment:
+      # Optional: set in .env to put the whole dashboard behind a login (user "admin").
+      LB_ADMIN_PASSWORD: ${LB_ADMIN_PASSWORD:-}
+    mem_limit: 256m
+    volumes:
+      - experiments:/data/experiments
+    depends_on:
+      b1: { condition: service_healthy }
+      b2: { condition: service_healthy }
+      b3: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8081/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      # ":80" = plain HTTP (local testing). On EC2 set a hostname in .env,
+      # e.g. SITE_ADDRESS=13-233-10-20.sslip.io, and Caddy gets HTTPS for it.
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    mem_limit: 128m
+    depends_on:
+      lb: { condition: service_healthy }
+
+  # ---- optional observability: docker compose --profile observability up -d ----
+  # Grafana on http://localhost:3000 (anonymous read-only). On a 1 GB instance,
+  # expect about 250 MB extra; leave the profile off there unless you need it.
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    profiles: [observability]
+    restart: unless-stopped
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=2d"]
+    volumes:
+      - ./deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    mem_limit: 256m
+
+  grafana:
+    image: grafana/grafana:12.1.0
+    profiles: [observability]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/loadbalancer.json
+    volumes:
+      - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./deploy/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    mem_limit: 256m
+    depends_on: [prometheus]
+
+volumes:
+  caddy_data: {}
+  caddy_config: {}
+  experiments: {}
+  prometheus_data: {}

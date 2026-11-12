@@ -1,0 +1,87 @@
+name: Deploy
+
+# Runs after CI passes on main, or by hand (Actions tab -> Deploy -> Run workflow).
+# Same steps as the manual update: build images here, copy them to EC2,
+# load them, restart with --no-build. No registry needed.
+#
+# Repository secrets (Settings -> Secrets and variables -> Actions):
+#   EC2_HOST      public IP or hostname of the instance
+#   EC2_USER      ubuntu
+#   EC2_SSH_KEY   the private key (.pem contents)
+#   SITE_URL      https://13-54-72-78.sslip.io (used for the smoke test)
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Build images
+        run: docker compose build
+
+      - name: Export images
+        run: |
+          docker save loadbalancer-lb:latest loadbalancer-b1:latest loadbalancer-b2:latest loadbalancer-b3:latest | gzip > lbimages.tar.gz
+          ls -lh lbimages.tar.gz
+
+      - name: Set up SSH
+        env:
+          KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOST: ${{ secrets.EC2_HOST }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/deploy.pem
+          chmod 600 ~/.ssh/deploy.pem
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+
+      - name: Copy images and config
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER_: ${{ secrets.EC2_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy.pem "$USER_@$HOST" 'mkdir -p ~/loadbalancer'
+          scp -i ~/.ssh/deploy.pem lbimages.tar.gz "$USER_@$HOST:~/lbimages.tar.gz"
+          scp -i ~/.ssh/deploy.pem -r docker-compose.yml .env.example deploy "$USER_@$HOST:~/loadbalancer/"
+
+      - name: Load and restart
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER_: ${{ secrets.EC2_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy.pem "$USER_@$HOST" '
+            set -e
+            cd ~/loadbalancer
+            test -f .env || { echo ".env missing on the server: create it from .env.example first"; exit 1; }
+            docker load -i ~/lbimages.tar.gz
+            docker compose up -d --no-build
+            docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile   # pick up Caddyfile changes
+            docker image prune -f
+            docker compose ps'
+
+      - name: Smoke test
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          for i in $(seq 1 20); do
+            if curl -fsS "$SITE_URL/healthz"; then echo "deployed"; exit 0; fi
+            sleep 3
+          done
+          echo "site did not become healthy"; exit 1

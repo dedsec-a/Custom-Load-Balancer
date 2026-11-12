@@ -1,0 +1,1119 @@
+{
+  "id": "20261112-112421-5ae758a77b03",
+  "spec": {
+    "kind": "compare",
+    "variants": [
+      {
+        "name": "Round robin",
+        "algorithm": "round_robin"
+      },
+      {
+        "name": "Least conn",
+        "algorithm": "least_conn"
+      },
+      {
+        "name": "FCFS",
+        "algorithm": "fcfs"
+      },
+      {
+        "name": "SJF",
+        "algorithm": "sjf",
+        "aging": 0.02
+      }
+    ],
+    "users": 150,
+    "mix": {
+      "/browse": 70,
+      "/checkout": 10,
+      "/search": 20
+    },
+    "seed": 42,
+    "duration_s": 30,
+    "warmup_s": 5,
+    "repeats": 3
+  },
+  "status": "done",
+  "started": "2026-11-12T16:54:21.1424813+05:30",
+  "finished": "2026-11-12T17:01:22.3976819+05:30",
+  "step": 12,
+  "steps": 12,
+  "current": "",
+  "eta_s": 0,
+  "runs": [
+    {
+      "variant": "Round robin",
+      "repeat": 1,
+      "seed": 42,
+      "throughput": 232.23333333333332,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6967,
+        "mean_ms": 641.6992434907411,
+        "p50_ms": 592.0123,
+        "p95_ms": 1416.8528,
+        "p99_ms": 1786.7937,
+        "max_ms": 1954.9579,
+        "max_wait_ms": 0
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4911,
+          "mean_ms": 686.3788595398083,
+          "p50_ms": 664.4453,
+          "p95_ms": 1451.4038,
+          "p99_ms": 1794.3577,
+          "max_ms": 1928.293,
+          "max_wait_ms": 0
+        },
+        "/checkout": {
+          "requests": 668,
+          "mean_ms": 752.1613529940117,
+          "p50_ms": 750.2954,
+          "p95_ms": 1471.0817,
+          "p99_ms": 1848.022,
+          "max_ms": 1954.9579,
+          "max_wait_ms": 0
+        },
+        "/search": {
+          "requests": 1388,
+          "mean_ms": 430.45264149855933,
+          "p50_ms": 402.1921,
+          "p95_ms": 825.9644,
+          "p99_ms": 1040.9582,
+          "max_ms": 1179.2047,
+          "max_wait_ms": 0
+        }
+      }
+    },
+    {
+      "variant": "Least conn",
+      "repeat": 1,
+      "seed": 42,
+      "throughput": 235.26666666666668,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 7058,
+        "mean_ms": 638.4378165769332,
+        "p50_ms": 646.0218,
+        "p95_ms": 948.6622,
+        "p99_ms": 1055.6484,
+        "max_ms": 1223.743,
+        "max_wait_ms": 0
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4981,
+          "mean_ms": 684.024296486649,
+          "p50_ms": 685.4909,
+          "p95_ms": 955.2629,
+          "p99_ms": 1059.807,
+          "max_ms": 1149.9274,
+          "max_wait_ms": 0
+        },
+        "/checkout": {
+          "requests": 678,
+          "mean_ms": 733.290021828909,
+          "p50_ms": 731.8962,
+          "p95_ms": 1013.6091,
+          "p99_ms": 1090.6181,
+          "max_ms": 1223.743,
+          "max_wait_ms": 0
+        },
+        "/search": {
+          "requests": 1399,
+          "mean_ms": 430.16329792709047,
+          "p50_ms": 419.9665,
+          "p95_ms": 614.08,
+          "p99_ms": 688.7715,
+          "max_ms": 756.5312,
+          "max_wait_ms": 0
+        }
+      }
+    },
+    {
+      "variant": "FCFS",
+      "repeat": 1,
+      "seed": 42,
+      "throughput": 231.83333333333334,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6955,
+        "mean_ms": 646.5319175557153,
+        "p50_ms": 648.9231,
+        "p95_ms": 796.4791,
+        "p99_ms": 852.7411,
+        "max_ms": 939.6268,
+        "max_wait_ms": 789.3876
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4899,
+          "mean_ms": 633.0459949785683,
+          "p50_ms": 633.101,
+          "p95_ms": 787.2354,
+          "p99_ms": 838.3439,
+          "max_ms": 939.6268,
+          "max_wait_ms": 789.3876
+        },
+        "/checkout": {
+          "requests": 673,
+          "mean_ms": 677.6220803863301,
+          "p50_ms": 681.7512,
+          "p95_ms": 821.6306,
+          "p99_ms": 894.4679,
+          "max_ms": 931.544,
+          "max_wait_ms": 773.2364
+        },
+        "/search": {
+          "requests": 1383,
+          "mean_ms": 679.1738952277652,
+          "p50_ms": 678.2465,
+          "p95_ms": 809.929,
+          "p99_ms": 866.8225,
+          "max_ms": 916.3566,
+          "max_wait_ms": 780.1842
+        }
+      }
+    },
+    {
+      "variant": "SJF",
+      "repeat": 1,
+      "seed": 42,
+      "throughput": 231.66666666666666,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6950,
+        "mean_ms": 645.1161516690644,
+        "p50_ms": 114.779,
+        "p95_ms": 2734.4251,
+        "p99_ms": 2797.7411,
+        "max_ms": 2955.1786,
+        "max_wait_ms": 2818.2484
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4891,
+          "mean_ms": 81.43729360049068,
+          "p50_ms": 61.1379,
+          "p95_ms": 173.734,
+          "p99_ms": 229.9164,
+          "max_ms": 375.7746,
+          "max_wait_ms": 96.7233
+        },
+        "/checkout": {
+          "requests": 679,
+          "mean_ms": 570.1016036818845,
+          "p50_ms": 567.8342,
+          "p95_ms": 749.708,
+          "p99_ms": 833.7941,
+          "max_ms": 1006.5163,
+          "max_wait_ms": 886.3987
+        },
+        "/search": {
+          "requests": 1380,
+          "mean_ms": 2679.8177262318864,
+          "p50_ms": 2682.5905,
+          "p95_ms": 2797.7411,
+          "p99_ms": 2879.1978,
+          "max_ms": 2955.1786,
+          "max_wait_ms": 2818.2484
+        }
+      }
+    },
+    {
+      "variant": "Least conn",
+      "repeat": 2,
+      "seed": 43,
+      "throughput": 231.26666666666668,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6938,
+        "mean_ms": 648.6391895647165,
+        "p50_ms": 653.0757,
+        "p95_ms": 956.8063,
+        "p99_ms": 1091.4349,
+        "max_ms": 1337.4186,
+        "max_wait_ms": 0
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4848,
+          "mean_ms": 699.9329424298694,
+          "p50_ms": 695.5519,
+          "p95_ms": 971.6907,
+          "p99_ms": 1118.0884,
+          "max_ms": 1337.4186,
+          "max_wait_ms": 0
+        },
+        "/checkout": {
+          "requests": 676,
+          "mean_ms": 738.0536143491139,
+          "p50_ms": 737.6666,
+          "p95_ms": 994.6015,
+          "p99_ms": 1100.5605,
+          "max_ms": 1209.7482,
+          "max_wait_ms": 0
+        },
+        "/search": {
+          "requests": 1414,
+          "mean_ms": 430.02796958981605,
+          "p50_ms": 428.0265,
+          "p95_ms": 597.5286,
+          "p99_ms": 673.8474,
+          "max_ms": 761.1791,
+          "max_wait_ms": 0
+        }
+      }
+    },
+    {
+      "variant": "FCFS",
+      "repeat": 2,
+      "seed": 43,
+      "throughput": 230.53333333333333,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6916,
+        "mean_ms": 652.5057392278773,
+        "p50_ms": 647.7804,
+        "p95_ms": 820.4003,
+        "p99_ms": 883.8312,
+        "max_ms": 1133.0219,
+        "max_wait_ms": 782.6426
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4838,
+          "mean_ms": 637.5703108929308,
+          "p50_ms": 630.993,
+          "p95_ms": 804.1457,
+          "p99_ms": 873.9245,
+          "max_ms": 983.7262,
+          "max_wait_ms": 782.6426
+        },
+        "/checkout": {
+          "requests": 675,
+          "mean_ms": 685.7760770370369,
+          "p50_ms": 683.4264,
+          "p95_ms": 854.2223,
+          "p99_ms": 924.5367,
+          "max_ms": 1133.0219,
+          "max_wait_ms": 780.5849
+        },
+        "/search": {
+          "requests": 1403,
+          "mean_ms": 688.00119486814,
+          "p50_ms": 682.676,
+          "p95_ms": 837.2259,
+          "p99_ms": 887.3039,
+          "max_ms": 1026.0353,
+          "max_wait_ms": 773.9415
+        }
+      }
+    },
+    {
+      "variant": "SJF",
+      "repeat": 2,
+      "seed": 43,
+      "throughput": 234.23333333333332,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 7027,
+        "mean_ms": 641.2514352070586,
+        "p50_ms": 113.9067,
+        "p95_ms": 2710.7175,
+        "p99_ms": 2775.1076,
+        "max_ms": 2932.4401,
+        "max_wait_ms": 2770.4996
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4914,
+          "mean_ms": 79.92344747659737,
+          "p50_ms": 61.004,
+          "p95_ms": 174.1166,
+          "p99_ms": 222.845,
+          "max_ms": 328.369,
+          "max_wait_ms": 72.7098
+        },
+        "/checkout": {
+          "requests": 707,
+          "mean_ms": 510.5142779349367,
+          "p50_ms": 508.3812,
+          "p95_ms": 640.7385,
+          "p99_ms": 690.3536,
+          "max_ms": 780.7145,
+          "max_wait_ms": 648.227
+        },
+        "/search": {
+          "requests": 1406,
+          "mean_ms": 2668.8452487908958,
+          "p50_ms": 2669.8049,
+          "p95_ms": 2775.1076,
+          "p99_ms": 2813.3826,
+          "max_ms": 2932.4401,
+          "max_wait_ms": 2770.4996
+        }
+      }
+    },
+    {
+      "variant": "Round robin",
+      "repeat": 2,
+      "seed": 43,
+      "throughput": 227.63333333333333,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6829,
+        "mean_ms": 655.2385674622934,
+        "p50_ms": 645.0242,
+        "p95_ms": 1285.7958,
+        "p99_ms": 1732.1537,
+        "max_ms": 1956.7924,
+        "max_wait_ms": 0
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4765,
+          "mean_ms": 703.7648779853108,
+          "p50_ms": 717.8805,
+          "p95_ms": 1313.2706,
+          "p99_ms": 1761.5193,
+          "max_ms": 1920.9803,
+          "max_wait_ms": 0
+        },
+        "/checkout": {
+          "requests": 670,
+          "mean_ms": 747.9892591044778,
+          "p50_ms": 782.225,
+          "p95_ms": 1361.3603,
+          "p99_ms": 1785.8051,
+          "max_ms": 1956.7924,
+          "max_wait_ms": 0
+        },
+        "/search": {
+          "requests": 1394,
+          "mean_ms": 444.7860329985651,
+          "p50_ms": 438.3339,
+          "p95_ms": 823.5355,
+          "p99_ms": 997.9725,
+          "max_ms": 1207.9893,
+          "max_wait_ms": 0
+        }
+      }
+    },
+    {
+      "variant": "FCFS",
+      "repeat": 3,
+      "seed": 44,
+      "throughput": 236.5,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 7095,
+        "mean_ms": 634.2607307963364,
+        "p50_ms": 632.388,
+        "p95_ms": 783.6114,
+        "p99_ms": 857.4493,
+        "max_ms": 973.3259,
+        "max_wait_ms": 781.3542
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4997,
+          "mean_ms": 619.9659723033827,
+          "p50_ms": 619.3538,
+          "p95_ms": 774.8581,
+          "p99_ms": 853.7899,
+          "max_ms": 973.3259,
+          "max_wait_ms": 781.3542
+        },
+        "/checkout": {
+          "requests": 711,
+          "mean_ms": 663.9266592123766,
+          "p50_ms": 663.874,
+          "p95_ms": 807.1939,
+          "p99_ms": 871.8649,
+          "max_ms": 971.0038,
+          "max_wait_ms": 752.2064
+        },
+        "/search": {
+          "requests": 1387,
+          "mean_ms": 670.5537611391495,
+          "p50_ms": 669.9449,
+          "p95_ms": 802.104,
+          "p99_ms": 856.0057,
+          "max_ms": 902.1702,
+          "max_wait_ms": 761.2236
+        }
+      }
+    },
+    {
+      "variant": "SJF",
+      "repeat": 3,
+      "seed": 44,
+      "throughput": 238.4,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 7152,
+        "mean_ms": 630.7338280061518,
+        "p50_ms": 112.7043,
+        "p95_ms": 2721.4619,
+        "p99_ms": 2779.6495,
+        "max_ms": 2854.0814,
+        "max_wait_ms": 2719.038
+      },
+      "paths": {
+        "/browse": {
+          "requests": 5016,
+          "mean_ms": 78.43474431818193,
+          "p50_ms": 57.9205,
+          "p95_ms": 164.2762,
+          "p99_ms": 224.6108,
+          "max_ms": 326.5283,
+          "max_wait_ms": 88.2776
+        },
+        "/checkout": {
+          "requests": 736,
+          "mean_ms": 511.1738971467393,
+          "p50_ms": 508.9391,
+          "p95_ms": 628.3425,
+          "p99_ms": 677.9255,
+          "max_ms": 689.8788,
+          "max_wait_ms": 548.785
+        },
+        "/search": {
+          "requests": 1400,
+          "mean_ms": 2672.396908642856,
+          "p50_ms": 2671.252,
+          "p95_ms": 2779.7971,
+          "p99_ms": 2819.2964,
+          "max_ms": 2854.0814,
+          "max_wait_ms": 2719.038
+        }
+      }
+    },
+    {
+      "variant": "Round robin",
+      "repeat": 3,
+      "seed": 44,
+      "throughput": 230.7,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 6921,
+        "mean_ms": 651.89645821413,
+        "p50_ms": 511.7482,
+        "p95_ms": 1685.8259,
+        "p99_ms": 2099.6519,
+        "max_ms": 2365.631,
+        "max_wait_ms": 0
+      },
+      "paths": {
+        "/browse": {
+          "requests": 4866,
+          "mean_ms": 701.5990462186603,
+          "p50_ms": 600.7815,
+          "p95_ms": 1735.4534,
+          "p99_ms": 2153.4642,
+          "max_ms": 2347.2,
+          "max_wait_ms": 0
+        },
+        "/checkout": {
+          "requests": 695,
+          "mean_ms": 711.4139719424459,
+          "p50_ms": 580.1483,
+          "p95_ms": 1831.4661,
+          "p99_ms": 2136.076,
+          "max_ms": 2365.631,
+          "max_wait_ms": 0
+        },
+        "/search": {
+          "requests": 1360,
+          "mean_ms": 443.64832198529456,
+          "p50_ms": 384.2599,
+          "p95_ms": 988.5974,
+          "p99_ms": 1261.9118,
+          "max_ms": 1358.2789,
+          "max_wait_ms": 0
+        }
+      }
+    },
+    {
+      "variant": "Least conn",
+      "repeat": 3,
+      "seed": 44,
+      "throughput": 239.76666666666668,
+      "errors": 0,
+      "shed": 0,
+      "overall": {
+        "requests": 7193,
+        "mean_ms": 624.4054728625057,
+        "p50_ms": 617.4388,
+        "p95_ms": 933.2262,
+        "p99_ms": 1082.3443,
+        "max_ms": 1331.0302,
+        "max_wait_ms": 0
+      },
+      "paths": {
+        "/browse": {
+          "requests": 5058,
+          "mean_ms": 668.213696975089,
+          "p50_ms": 650.0862,
+          "p95_ms": 947.4583,
+          "p99_ms": 1089.8889,
+          "max_ms": 1264.1062,
+          "max_wait_ms": 0
+        },
+        "/checkout": {
+          "requests": 721,
+          "mean_ms": 714.6686463245494,
+          "p50_ms": 699.5253,
+          "p95_ms": 982.1791,
+          "p99_ms": 1134.39,
+          "max_ms": 1331.0302,
+          "max_wait_ms": 0
+        },
+        "/search": {
+          "requests": 1414,
+          "mean_ms": 421.6743939179628,
+          "p50_ms": 413.1473,
+          "p95_ms": 618.0334,
+          "p99_ms": 696.5667,
+          "max_ms": 875.0586,
+          "max_wait_ms": 0
+        }
+      }
+    }
+  ],
+  "summary": [
+    {
+      "variant": "Round robin",
+      "algorithm": "round_robin",
+      "runs": 3,
+      "throughput": {
+        "median": 230.7,
+        "min": 227.63333333333333,
+        "max": 232.23333333333332
+      },
+      "errors": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "shed": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "overall": {
+        "p50_ms": {
+          "median": 592.0123,
+          "min": 511.7482,
+          "max": 645.0242
+        },
+        "p95_ms": {
+          "median": 1416.8528,
+          "min": 1285.7958,
+          "max": 1685.8259
+        },
+        "p99_ms": {
+          "median": 1786.7937,
+          "min": 1732.1537,
+          "max": 2099.6519
+        },
+        "max_ms": {
+          "median": 1956.7924,
+          "min": 1954.9579,
+          "max": 2365.631
+        },
+        "max_wait_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "paths": {
+        "/browse": {
+          "p50_ms": {
+            "median": 664.4453,
+            "min": 600.7815,
+            "max": 717.8805
+          },
+          "p95_ms": {
+            "median": 1451.4038,
+            "min": 1313.2706,
+            "max": 1735.4534
+          },
+          "p99_ms": {
+            "median": 1794.3577,
+            "min": 1761.5193,
+            "max": 2153.4642
+          },
+          "max_ms": {
+            "median": 1928.293,
+            "min": 1920.9803,
+            "max": 2347.2
+          },
+          "max_wait_ms": {
+            "median": 0,
+            "min": 0,
+            "max": 0
+          }
+        },
+        "/checkout": {
+          "p50_ms": {
+            "median": 750.2954,
+            "min": 580.1483,
+            "max": 782.225
+          },
+          "p95_ms": {
+            "median": 1471.0817,
+            "min": 1361.3603,
+            "max": 1831.4661
+          },
+          "p99_ms": {
+            "median": 1848.022,
+            "min": 1785.8051,
+            "max": 2136.076
+          },
+          "max_ms": {
+            "median": 1956.7924,
+            "min": 1954.9579,
+            "max": 2365.631
+          },
+          "max_wait_ms": {
+            "median": 0,
+            "min": 0,
+            "max": 0
+          }
+        },
+        "/search": {
+          "p50_ms": {
+            "median": 402.1921,
+            "min": 384.2599,
+            "max": 438.3339
+          },
+          "p95_ms": {
+            "median": 825.9644,
+            "min": 823.5355,
+            "max": 988.5974
+          },
+          "p99_ms": {
+            "median": 1040.9582,
+            "min": 997.9725,
+            "max": 1261.9118
+          },
+          "max_ms": {
+            "median": 1207.9893,
+            "min": 1179.2047,
+            "max": 1358.2789
+          },
+          "max_wait_ms": {
+            "median": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "variant": "Least conn",
+      "algorithm": "least_conn",
+      "runs": 3,
+      "throughput": {
+        "median": 235.26666666666668,
+        "min": 231.26666666666668,
+        "max": 239.76666666666668
+      },
+      "errors": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "shed": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "overall": {
+        "p50_ms": {
+          "median": 646.0218,
+          "min": 617.4388,
+          "max": 653.0757
+        },
+        "p95_ms": {
+          "median": 948.6622,
+          "min": 933.2262,
+          "max": 956.8063
+        },
+        "p99_ms": {
+          "median": 1082.3443,
+          "min": 1055.6484,
+          "max": 1091.4349
+        },
+        "max_ms": {
+          "median": 1331.0302,
+          "min": 1223.743,
+          "max": 1337.4186
+        },
+        "max_wait_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "paths": {
+        "/browse": {
+          "p50_ms": {
+            "median": 685.4909,
+            "min": 650.0862,
+            "max": 695.5519
+          },
+          "p95_ms": {
+            "median": 955.2629,
+            "min": 947.4583,
+            "max": 971.6907
+          },
+          "p99_ms": {
+            "median": 1089.8889,
+            "min": 1059.807,
+            "max": 1118.0884
+          },
+          "max_ms": {
+            "median": 1264.1062,
+            "min": 1149.9274,
+            "max": 1337.4186
+          },
+          "max_wait_ms": {
+            "median": 0,
+            "min": 0,
+            "max": 0
+          }
+        },
+        "/checkout": {
+          "p50_ms": {
+            "median": 731.8962,
+            "min": 699.5253,
+            "max": 737.6666
+          },
+          "p95_ms": {
+            "median": 994.6015,
+            "min": 982.1791,
+            "max": 1013.6091
+          },
+          "p99_ms": {
+            "median": 1100.5605,
+            "min": 1090.6181,
+            "max": 1134.39
+          },
+          "max_ms": {
+            "median": 1223.743,
+            "min": 1209.7482,
+            "max": 1331.0302
+          },
+          "max_wait_ms": {
+            "median": 0,
+            "min": 0,
+            "max": 0
+          }
+        },
+        "/search": {
+          "p50_ms": {
+            "median": 419.9665,
+            "min": 413.1473,
+            "max": 428.0265
+          },
+          "p95_ms": {
+            "median": 614.08,
+            "min": 597.5286,
+            "max": 618.0334
+          },
+          "p99_ms": {
+            "median": 688.7715,
+            "min": 673.8474,
+            "max": 696.5667
+          },
+          "max_ms": {
+            "median": 761.1791,
+            "min": 756.5312,
+            "max": 875.0586
+          },
+          "max_wait_ms": {
+            "median": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    {
+      "variant": "FCFS",
+      "algorithm": "fcfs",
+      "runs": 3,
+      "throughput": {
+        "median": 231.83333333333334,
+        "min": 230.53333333333333,
+        "max": 236.5
+      },
+      "errors": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "shed": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "overall": {
+        "p50_ms": {
+          "median": 647.7804,
+          "min": 632.388,
+          "max": 648.9231
+        },
+        "p95_ms": {
+          "median": 796.4791,
+          "min": 783.6114,
+          "max": 820.4003
+        },
+        "p99_ms": {
+          "median": 857.4493,
+          "min": 852.7411,
+          "max": 883.8312
+        },
+        "max_ms": {
+          "median": 973.3259,
+          "min": 939.6268,
+          "max": 1133.0219
+        },
+        "max_wait_ms": {
+          "median": 782.6426,
+          "min": 781.3542,
+          "max": 789.3876
+        }
+      },
+      "paths": {
+        "/browse": {
+          "p50_ms": {
+            "median": 630.993,
+            "min": 619.3538,
+            "max": 633.101
+          },
+          "p95_ms": {
+            "median": 787.2354,
+            "min": 774.8581,
+            "max": 804.1457
+          },
+          "p99_ms": {
+            "median": 853.7899,
+            "min": 838.3439,
+            "max": 873.9245
+          },
+          "max_ms": {
+            "median": 973.3259,
+            "min": 939.6268,
+            "max": 983.7262
+          },
+          "max_wait_ms": {
+            "median": 782.6426,
+            "min": 781.3542,
+            "max": 789.3876
+          }
+        },
+        "/checkout": {
+          "p50_ms": {
+            "median": 681.7512,
+            "min": 663.874,
+            "max": 683.4264
+          },
+          "p95_ms": {
+            "median": 821.6306,
+            "min": 807.1939,
+            "max": 854.2223
+          },
+          "p99_ms": {
+            "median": 894.4679,
+            "min": 871.8649,
+            "max": 924.5367
+          },
+          "max_ms": {
+            "median": 971.0038,
+            "min": 931.544,
+            "max": 1133.0219
+          },
+          "max_wait_ms": {
+            "median": 773.2364,
+            "min": 752.2064,
+            "max": 780.5849
+          }
+        },
+        "/search": {
+          "p50_ms": {
+            "median": 678.2465,
+            "min": 669.9449,
+            "max": 682.676
+          },
+          "p95_ms": {
+            "median": 809.929,
+            "min": 802.104,
+            "max": 837.2259
+          },
+          "p99_ms": {
+            "median": 866.8225,
+            "min": 856.0057,
+            "max": 887.3039
+          },
+          "max_ms": {
+            "median": 916.3566,
+            "min": 902.1702,
+            "max": 1026.0353
+          },
+          "max_wait_ms": {
+            "median": 773.9415,
+            "min": 761.2236,
+            "max": 780.1842
+          }
+        }
+      }
+    },
+    {
+      "variant": "SJF",
+      "algorithm": "sjf",
+      "runs": 3,
+      "throughput": {
+        "median": 234.23333333333332,
+        "min": 231.66666666666666,
+        "max": 238.4
+      },
+      "errors": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "shed": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "overall": {
+        "p50_ms": {
+          "median": 113.9067,
+          "min": 112.7043,
+          "max": 114.779
+        },
+        "p95_ms": {
+          "median": 2721.4619,
+          "min": 2710.7175,
+          "max": 2734.4251
+        },
+        "p99_ms": {
+          "median": 2779.6495,
+          "min": 2775.1076,
+          "max": 2797.7411
+        },
+        "max_ms": {
+          "median": 2932.4401,
+          "min": 2854.0814,
+          "max": 2955.1786
+        },
+        "max_wait_ms": {
+          "median": 2770.4996,
+          "min": 2719.038,
+          "max": 2818.2484
+        }
+      },
+      "paths": {
+        "/browse": {
+          "p50_ms": {
+            "median": 61.004,
+            "min": 57.9205,
+            "max": 61.1379
+          },
+          "p95_ms": {
+            "median": 173.734,
+            "min": 164.2762,
+            "max": 174.1166
+          },
+          "p99_ms": {
+            "median": 224.6108,
+            "min": 222.845,
+            "max": 229.9164
+          },
+          "max_ms": {
+            "median": 328.369,
+            "min": 326.5283,
+            "max": 375.7746
+          },
+          "max_wait_ms": {
+            "median": 88.2776,
+            "min": 72.7098,
+            "max": 96.7233
+          }
+        },
+        "/checkout": {
+          "p50_ms": {
+            "median": 508.9391,
+            "min": 508.3812,
+            "max": 567.8342
+          },
+          "p95_ms": {
+            "median": 640.7385,
+            "min": 628.3425,
+            "max": 749.708
+          },
+          "p99_ms": {
+            "median": 690.3536,
+            "min": 677.9255,
+            "max": 833.7941
+          },
+          "max_ms": {
+            "median": 780.7145,
+            "min": 689.8788,
+            "max": 1006.5163
+          },
+          "max_wait_ms": {
+            "median": 648.227,
+            "min": 548.785,
+            "max": 886.3987
+          }
+        },
+        "/search": {
+          "p50_ms": {
+            "median": 2671.252,
+            "min": 2669.8049,
+            "max": 2682.5905
+          },
+          "p95_ms": {
+            "median": 2779.7971,
+            "min": 2775.1076,
+            "max": 2797.7411
+          },
+          "p99_ms": {
+            "median": 2819.2964,
+            "min": 2813.3826,
+            "max": 2879.1978
+          },
+          "max_ms": {
+            "median": 2932.4401,
+            "min": 2854.0814,
+            "max": 2955.1786
+          },
+          "max_wait_ms": {
+            "median": 2770.4996,
+            "min": 2719.038,
+            "max": 2818.2484
+          }
+        }
+      }
+    }
+  ],
+  "finding": "SJF cut /browse p95 by 78% vs FCFS, but raised /search p99 by 225%."
+}

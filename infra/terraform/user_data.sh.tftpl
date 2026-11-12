@@ -1,0 +1,27 @@
+#!/bin/bash
+# First-boot setup: Docker, swap, and (if a repo URL was given) the app.
+set -euxo pipefail
+exec > /var/log/loadbalancer-setup.log 2>&1
+
+curl -fsSL https://get.docker.com | sh
+usermod -aG docker ubuntu
+
+# 2 GB swap: building the image needs more than 1 GB of RAM.
+if [ ! -f /swapfile ]; then
+  fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+  echo '/swapfile none swap sw 0 0' >> /etc/fstab
+fi
+
+REPO_URL="${repo_url}"
+APP=/home/ubuntu/loadbalancer
+if [ -n "$REPO_URL" ]; then
+  sudo -u ubuntu git clone "$REPO_URL" "$APP"
+  cat > "$APP/.env" <<ENV
+SITE_ADDRESS=${site_address}
+MAX_USERS=${max_users}
+ENV
+  chown ubuntu:ubuntu "$APP/.env"
+  cd "$APP" && sudo -u ubuntu docker compose up -d --build
+else
+  echo "No repo_url: copy the project to $APP, create .env from .env.example, then run docker compose up -d."
+fi

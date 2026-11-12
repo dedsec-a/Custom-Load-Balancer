@@ -1,0 +1,8 @@
+**/node_modules
+**/dist
+**/bin
+**/*.exe
+**/*.exe~
+backend/results
+.git
+.env

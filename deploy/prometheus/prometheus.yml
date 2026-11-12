@@ -1,0 +1,9 @@
+# Scrapes the load balancer's /metrics on the private Compose network.
+global:
+  scrape_interval: 5s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: loadbalancer
+    static_configs:
+      - targets: ["lb:8081"]
